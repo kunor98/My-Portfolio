@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carlos Kunor Matiok | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0e0e0e;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px 0;
+      text-align: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    header nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    header nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 0.9rem;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    header nav a:hover {
+      color: #00bfff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    section {
+      padding: 80px 5%;
+      min-height: 100vh;
+    }
+
+    .home {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 120px;
+    }
+
+    .home h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #00bfff;
+      animation: fadeIn 2s;
+      line-height: 1.2;
+      margin-bottom: 15px;
+    }
+
+    .home p {
+      margin-top: 10px;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      line-height: 1.5;
+    }
+
+    .about,
+    .education,
+    .projects,
+    .contact {
+      animation: slideUp 1s ease;
+    }
+
+    .about h2,
+    .education h2,
+    .projects h2,
+    .contact h2 {
+      color: #00bfff;
+      margin-bottom: 20px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .about p {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      line-height: 1.6;
+    }
+
+    /* Education Section Styles */
+    .education {
+      background: #131313;
+    }
+
+    .education-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .education-item {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #00bfff;
+      transition: transform 0.3s;
+    }
+
+    .education-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .education-item h3 {
+      color: #00bfff;
+      margin-bottom: 10px;
+      font-size: clamp(1.1rem, 3vw, 1.3rem);
+    }
+
+    .education-item .institution {
+      font-weight: 600;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    .education-item .institution i {
+      margin-right: 8px;
+      color: #00bfff;
+    }
+
+    .education-item .duration {
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+
+    .education-item .description {
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .education-item .courses {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #333;
+    }
+
+    .education-item .courses h4 {
+      color: #00bfff;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .education-item .courses ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .education-item .courses li {
+      margin-bottom: 5px;
+      position: relative;
+      padding-left: 20px;
+      font-size: 0.9rem;
+    }
+
+    .education-item .courses li:before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #00bfff;
+    }
+
+    .projects .project {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 15px 0;
+      transition: transform 0.3s;
+    }
+
+    .projects .project:hover {
+      transform: translateY(-5px);
+    }
+
+    .projects .project h3 {
+      font-size: clamp(1.1rem, 3vw, 1.3rem);
+      margin-bottom: 10px;
+    }
+
+    .projects .project p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      gap: 40px;
+    }
+
+    .contact-form {
+      flex: 1;
+      min-width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .contact-form {
+        min-width: 300px;
+      }
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .contact input,
+    .contact textarea {
+      margin-bottom: 15px;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #1c1c1c;
+      color: white;
+      font-size: 16px;
+      /* Prevents zoom on iOS */
+    }
+
+    .contact button {
+      background: #00bfff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+      min-height: 44px;
+      /* Better touch target */
+    }
+
+    .contact button:hover {
+      background: #008fcc;
+    }
+
+    .social-media {
+      flex: 1;
+      min-width: 100%;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .social-media {
+        min-width: 300px;
+        margin-top: 0;
+      }
+    }
+
+    .social-media h3 {
+      color: #00bfff;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .social-media p {
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .social-icons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 480px) {
+      .social-icons {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .social-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.3s, color 0.3s;
+      padding: 10px;
+      min-height: 80px;
+      /* Better touch target */
+    }
+
+    .social-icon:hover {
+      transform: translateY(-5px);
+      color: #00bfff;
+    }
+
+    .social-icon i {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      background: #1c1c1c;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+
+    .social-icon:hover i {
+      background: #00bfff;
+    }
+
+    .social-icon span {
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile menu for very small screens */
+    @media (max-width: 480px) {
+      header nav {
+        gap: 5px;
+      }
+
+      header nav a {
+        margin: 0 5px;
+        font-size: 0.8rem;
+        padding: 8px 12px;
+      }
+
+      section {
+        padding: 60px 5%;
+      }
+
+      .home {
+        padding-top: 100px;
+      }
+
+      .social-icons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("ntcAgzjZCo4nXEn7F");
+    })();
+
+    function sendMail(event) {
+      event.preventDefault();
+
+      emailjs.send("service_owsqca8", "template_928678n", {
+        from_name: document.getElementById("name").value,
+        from_email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      }).then(function () {
+        alert("Message sent successfully!");
+        document.getElementById("contactForm").reset();
+      }, function (error) {
+        alert("Failed to send message. Error: " + JSON.stringify(error));
+      });
+    }
+
+    // Add smooth scrolling for better mobile experience
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="home">
+    <h1>Hi, I'm Carlos Kunor Matiok</h1>
+    <p>IT Student at Mount Kenya University | Future Innovator & Developer</p>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>I'm a passionate Information Technology student at Mount Kenya University. I enjoy building creative and
+      efficient tech solutions, especially in web development and system design. My goal is to use technology to solve
+      real-world challenges and inspire innovation across Africa.</p>
+  </section>
+
+  <section id="education" class="education">
+    <h2>Education Background</h2>
+    <div class="education-container">
+      <div class="education-item">
+        <h3>Bachelor of Science in Information Technology</h3>
+        <div class="institution">
+          <i class="fas fa-university"></i>
+          Mount Kenya University
+        </div>
+        <div class="duration">2022 - Present</div>
+        <div class="description">
+          Currently pursuing my degree with a focus on software development, database management, and network systems.
+        </div>
+        <div class="courses">
+          <h4>Key Courses:</h4>
+          <ul>
+            <li>Web Development & Design</li>
+            <li>Database Management Systems</li>
+            <li>Object-Oriented Programming</li>
+            <li>Network Administration</li>
+            <li>Software Engineering</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="education-item">
+        <h3>High School Diploma</h3>
+        <div class="institution">
+          <i class="fas fa-school"></i>
+          Bishop Mazzolari Memorial Secondary School
+        </div>
+        <div class="duration">2017 - 2020</div>
+        <div class="description">
+          Completed high school in with good results.
+        </div>
+        <div class="courses">
+          <h4>Achievements:</h4>
+          <ul>
+            <li>Certificate of Secondary Education (CSE)</li>
+            <li>Certificate Of Computer Packages</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="education-item">
+        <h3>Certifications & Additional Training</h3>
+        <div class="institution">
+          <i class="fas fa-certificate"></i>
+          Various Platforms
+        </div>
+        <div class="duration">Ongoing</div>
+        <div class="description">
+          Continuously expanding my skills through online courses and certifications in emerging technologies.
+        </div>
+        <div class="courses">
+          <h4>Recent Certifications:</h4>
+          <ul>
+            <li>[Add relevant certifications here]</li>
+            <li>[Add relevant certifications here]</li>
+            <li>[Add relevant certifications here]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <h2>My Projects</h2>
+    <div class="project">
+      <h3>Mabati Rolling Mills Management System</h3>
+      <p>A Java-based system for managing inventory, orders, and suppliers using serialization for data persistence.</p>
+    </div>
+    <div class="project">
+      <h3>Restaurant Reservation System</h3>
+      <p>A full-featured PHP/MySQL web system allowing users to book tables online and view special offers in real-time.
+      </p>
+    </div>
+    <div class="project">
+      <h3>EduTech Platform</h3>
+      <p>An educational innovation project enhancing learning through digital technology integration.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-container">
+      <div class="contact-form">
+        <form id="contactForm" onsubmit="sendMail(event)">
+          <input type="text" id="name" placeholder="Your Name" required>
+          <input type="email" id="email" placeholder="Your Email" required>
+          <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+
+      <div class="social-media">
+        <h3>Connect With Me</h3>
+        <p>Feel free to reach out through any of these platforms:</p>
+        <div class="social-icons">
+          <a href="https://linkedin.com/in/yourprofile" class="social-icon" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/kunor98" class="social-icon" target="_blank">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://twitter.com/yourusername" class="social-icon" target="_blank">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+          </a>
+          <a href="https://web.facebook.com/kunoralfred.matiok" class="social-icon" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.instagram.com/its____unique_____/" class="social-icon" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+          </a>
+          <a href="mailto:kunormatiok@gmail.com" class="social-icon">
+            <i class="fas fa-envelope"></i>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Carlos Kunor Matiok. All Rights Reserved.
+  </footer>
+
+</body>
+
+</html>
